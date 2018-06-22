@@ -27,9 +27,6 @@
             @Html.DisplayNameFor(model => model.Synopsis)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Votes)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Rating)
         </th>
         <th>
@@ -56,13 +53,10 @@
             @Html.DisplayFor(modelItem => item.Synopsis)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Votes)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Rating)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ImageUrl)
+            <img src="@item.ImageUrl" style="max-height: 250px; max-width: 250px"/>
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
