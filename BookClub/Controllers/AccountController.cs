@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using BookClub.Models;
+using System.Collections.Generic;
 
 namespace BookClub.Controllers
 {
@@ -20,6 +21,25 @@ namespace BookClub.Controllers
 
         public AccountController()
         {
+        }
+
+        public ActionResult AddUserToRole()
+        {
+            AddToRoleModel model = new AddToRoleModel();
+            model.roles = new List<string>() { "User", "Editor", "Administrator"};
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult AddUserToRole(AddToRoleModel model)
+        {
+            var email = model.Email;
+            var user = UserManager.FindByEmail(model.Email);
+            if (user == null)
+                throw new HttpException(404, "There is no user with email " + model.Email);
+
+            UserManager.AddToRole(user.Id, model.selectedRole);
+            return RedirectToAction("Index", "Books");
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
