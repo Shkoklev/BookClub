@@ -4,8 +4,6 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -28,7 +26,7 @@
                 @Html.DisplayNameFor(model => model.Synopsis)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Rating)
+                @Html.DisplayName("Rating")
             </th>
             <th>
                 @Html.DisplayName("Image")
@@ -56,7 +54,8 @@
                     @Html.DisplayFor(modelItem => item.Synopsis)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Rating)
+                    @Html.DisplayFor(modelItem => item.AverageRating)
+                    @Html.DisplayName(" /5")
                 </td>
                 <td>
                     <img src="@item.ImageUrl" style="max-height: 250px; max-width: 250px" />
@@ -68,7 +67,7 @@
 
                     <div class="row">
                         <div class="col-sm-12">
-                            <input id="input-21b" type="number" class="rating" min=0 max=5 step=0.5 data-glyphicon="false" data-star-captions="{}" data-default-caption="{rating} Stars" data-size="xs">
+                            <input data-book-title="@item.Title" data-book-id="@item.Id" type="number" class="rating" min=0 max=5 step=1 data-glyphicon="false" data-size="xs">
                         </div>
                     </div>
                 </td>
@@ -79,10 +78,24 @@
 
 @section scripts {
     <script>
-        $(document).ready(function () {
+        $(document).ready(function () { 
             $("#myTable").DataTable();
-            $("#input-21b").on("rating.change", function (event, value, caption) {
-                alert("You rated: " + value + " = " + $(caption).text());
+            $("input").on('rating:change', function (event, value, caption) {
+                var input = $(this);
+                bootbox.confirm("Do you want to vote with " + value + " Stars for the book " + input.attr('data-book-title') + " ?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/BooksApi/RateBook/" + input.attr('data-book-id')+"?value="+value,
+                            method: "POST",
+                            success: function () {
+                                bootbox.dialog({
+                                    message: '<p class="text-center">You have voted successfully !</p>',
+                                    closeButton: true
+                                });
+                            }
+                        });
+                    }
+                });
             });
         });
     </script>

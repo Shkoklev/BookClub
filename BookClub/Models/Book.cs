@@ -23,6 +23,8 @@ namespace BookClub.Models
 
         public int Rating { get; set; }
 
+        public float AverageRating { get; set; }
+
         public string ImageUrl { get; set; }
 
         public List<ApplicationUser> Users { get; set; }

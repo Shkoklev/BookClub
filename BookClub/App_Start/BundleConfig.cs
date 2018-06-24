@@ -12,7 +12,8 @@ namespace BookClub
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/DataTables/jquery.dataTables.js",
                         "~/Scripts/DataTables/dataTables.bootstrap.js",
-                        "~/Scripts/star-rating.js"));
+                        "~/Scripts/star-rating.js",
+                        "~/Scripts/star-rating.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -27,12 +28,14 @@ namespace BookClub
                       "~/Scripts/bootbox.js",
                       "~/Scripts/DataTables/jquery.dataTables.js",
                       "~/Scripts/DataTables/dataTables.bootstrap.js",
-                      "~/Scripts/star-rating.js"));
+                      "~/Scripts/star-rating.js",
+                      "~/Scripts/star-rating.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/DataTables/css/dataTables.bootstrap.css",
                       "~/Content/star-rating.css",
+                      "~/Content/star-rating.min.css", 
                       "~/Content/site.css"));
         }
     }
