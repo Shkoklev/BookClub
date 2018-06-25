@@ -26,9 +26,6 @@
                 @Html.DisplayNameFor(model => model.Synopsis)
             </th>
             <th>
-                @Html.DisplayName("Rating")
-            </th>
-            <th>
                 @Html.DisplayName("Image")
             </th>
             <th></th>
@@ -54,21 +51,30 @@
                     @Html.DisplayFor(modelItem => item.Synopsis)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.AverageRating)
-                    @Html.DisplayName(" /5")
-                </td>
-                <td>
                     <img src="@item.ImageUrl" style="max-height: 250px; max-width: 250px" />
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) 
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) 
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
 
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <input data-book-title="@item.Title" data-book-id="@item.Id" type="number" class="rating" min=0 max=5 step=1 data-glyphicon="false" data-size="xs">
+                    @if (User.IsInRole("User"))
+                    {
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <input data-book-title="@item.Title" data-book-id="@item.Id" type="number" class="rating" min=0 max=5 step=1 data-glyphicon="false" data-size="xs">
+                            </div>
                         </div>
+                    }
+
+                    <div class="row">
+                        <i class="glyphicon glyphicon-star"></i>
+                        @Html.DisplayFor(modelItem => item.AverageRating)
+                        @Html.DisplayName(" / 5")
+                    </div>
+                    <div class="row">
+                        @Html.DisplayFor(modelItem => item.Votes)
+                        @Html.DisplayName("votes")
                     </div>
                 </td>
             </tr>
@@ -86,7 +92,7 @@
                     if (result) {
                         $.ajax({
                             url: "/api/BooksApi/RateBook/" + input.attr('data-book-id')+"?value="+value,
-                            method: "POST",
+                            type: "POST",
                             success: function () {
                                 bootbox.dialog({
                                     message: '<p class="text-center">You have voted successfully !</p>',

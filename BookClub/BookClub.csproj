@@ -221,11 +221,16 @@
     <Compile Include="Migrations\201806241936422_AverageRating added.Designer.cs">
       <DependentUpon>201806241936422_AverageRating added.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806251229274_UserBookRatingModel Added.cs" />
+    <Compile Include="Migrations\201806251229274_UserBookRatingModel Added.Designer.cs">
+      <DependentUpon>201806251229274_UserBookRatingModel Added.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\UserBookRatingModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -561,6 +566,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806241936422_AverageRating added.resx">
       <DependentUpon>201806241936422_AverageRating added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806251229274_UserBookRatingModel Added.resx">
+      <DependentUpon>201806251229274_UserBookRatingModel Added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

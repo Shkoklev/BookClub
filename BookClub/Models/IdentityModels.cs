@@ -18,7 +18,7 @@ namespace BookClub.Models
 
         public string Description { get; set; }
 
-        public List<Book> Books { get; set; }
+        public virtual ICollection<Book> Books { get; set; }
 
         public ApplicationUser()
         {
@@ -47,5 +47,7 @@ namespace BookClub.Models
         }
 
         public DbSet<Book> Books { get; set; }
+
+        public DbSet<UserBookRatingModel> UserBookRatings { get; set; }
     }
 }

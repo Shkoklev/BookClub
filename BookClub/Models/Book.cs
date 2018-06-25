@@ -27,7 +27,7 @@ namespace BookClub.Models
 
         public string ImageUrl { get; set; }
 
-        public List<ApplicationUser> Users { get; set; }
+        public virtual ICollection<ApplicationUser> Users { get; set; }
 
         public Book()
         {
