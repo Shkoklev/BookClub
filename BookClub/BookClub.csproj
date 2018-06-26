@@ -207,7 +207,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BooksApiController.cs" />
-    <Compile Include="Controllers\BooksController.cs" />
+    <Compile Include="Controllers\BookClubController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -224,6 +224,14 @@
     <Compile Include="Migrations\201806251229274_UserBookRatingModel Added.cs" />
     <Compile Include="Migrations\201806251229274_UserBookRatingModel Added.Designer.cs">
       <DependentUpon>201806251229274_UserBookRatingModel Added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806261622397_Added Required Fields.cs" />
+    <Compile Include="Migrations\201806261622397_Added Required Fields.Designer.cs">
+      <DependentUpon>201806261622397_Added Required Fields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806261649495_gender added.cs" />
+    <Compile Include="Migrations\201806261649495_gender added.Designer.cs">
+      <DependentUpon>201806261649495_gender added.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -537,12 +545,13 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Books\Create.cshtml" />
-    <Content Include="Views\Books\Delete.cshtml" />
-    <Content Include="Views\Books\Details.cshtml" />
-    <Content Include="Views\Books\Edit.cshtml" />
-    <Content Include="Views\Books\Index.cshtml" />
+    <Content Include="Views\BookClub\Create.cshtml" />
+    <Content Include="Views\BookClub\Delete.cshtml" />
+    <Content Include="Views\BookClub\Details.cshtml" />
+    <Content Include="Views\BookClub\Edit.cshtml" />
+    <Content Include="Views\BookClub\Books.cshtml" />
     <Content Include="Views\Account\AddUserToRole.cshtml" />
+    <Content Include="Views\BookClub\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -569,6 +578,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806251229274_UserBookRatingModel Added.resx">
       <DependentUpon>201806251229274_UserBookRatingModel Added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806261622397_Added Required Fields.resx">
+      <DependentUpon>201806261622397_Added Required Fields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806261649495_gender added.resx">
+      <DependentUpon>201806261649495_gender added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

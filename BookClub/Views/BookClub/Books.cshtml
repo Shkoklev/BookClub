@@ -1,0 +1,108 @@
+﻿@model IEnumerable<BookClub.Models.Book>
+
+@{
+    ViewBag.Title = "Books";
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table" id="myTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Genre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Synopsis)
+            </th>
+            <th>
+                @Html.DisplayName("Image")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Synopsis)
+                </td>
+                <td>
+                    <img src="@item.ImageUrl" style="max-height: 250px; max-width: 250px" />
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) 
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) 
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+
+                    @if (User.IsInRole("User"))
+                    {
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <input data-book-title="@item.Title" data-book-id="@item.Id" type="number" class="rating" min=0 max=5 step=1 data-glyphicon="false" data-size="xs">
+                            </div>
+                        </div>
+                    }
+
+                    <div class="row">
+                        <i class="glyphicon glyphicon-star"></i>
+                        @Html.DisplayFor(modelItem => item.AverageRating)
+                        @Html.DisplayName(" / 5")
+                    </div>
+                    <div class="row">
+                        @Html.DisplayFor(modelItem => item.Votes)
+                        @Html.DisplayName("votes")
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts {
+    <script>
+        $(document).ready(function () { 
+            $("#myTable").DataTable();
+            $(document).on('rating:change', 'input', function (event, value, caption) {
+                var input = $(this);
+                bootbox.confirm("Do you want to vote with " + value + " Stars for the book " + input.attr('data-book-title') + " ?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/BooksApi/RateBook/" + input.attr('data-book-id')+"?value="+value,
+                            type: "POST",
+                            success: function () {
+                                bootbox.dialog({
+                                    message: '<p class="text-center">You have voted successfully !</p>',
+                                    closeButton: true
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}

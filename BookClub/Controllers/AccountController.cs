@@ -39,7 +39,7 @@ namespace BookClub.Controllers
                 throw new HttpException(404, "There is no user with email " + model.Email);
 
             UserManager.AddToRole(user.Id, model.selectedRole);
-            return RedirectToAction("Index", "Books");
+            return RedirectToAction("Index", "BookClub");
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -95,7 +95,7 @@ namespace BookClub.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -171,7 +171,15 @@ namespace BookClub.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Username, Email = model.Email, Age = model.Age, Gender = model.Gender };
+
+                if(model.Avatar == null )
+                {
+                    model.Avatar = "https://cdn4.iconfinder.com/data/icons/basic-interface-overcolor/512/user-512.png";
+                }
+
+                user.Avatar = model.Avatar;
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -387,7 +395,7 @@ namespace BookClub.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { Email = model.Email };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

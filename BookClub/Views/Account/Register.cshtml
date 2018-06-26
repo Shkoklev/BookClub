@@ -12,9 +12,34 @@
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
+        @Html.LabelFor(m => m.Username, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Username, new { @class = "form-control", autocomplete = "off" })
+        </div>
+    </div>
+    <div class="form-group">
         @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", autocomplete="off" })
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", autocomplete = "off" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Age, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Age, new { @class = "form-control", autocomplete = "off" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Gender, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            Female  @Html.RadioButtonFor(m => m.Gender, "Female")
+            Male  @Html.RadioButtonFor(m => m.Gender, "Male")
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Avatar, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Avatar, new { @class = "form-control", autocomplete = "off" })
         </div>
     </div>
     <div class="form-group">

@@ -49,9 +49,8 @@ namespace BookClub.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -64,6 +63,20 @@ namespace BookClub.Models
 
     public class RegisterViewModel
     {
+        [Required]
+        [Display(Name = "Username")]
+        public string Username { get; set; }
+
+        [Required]
+        [Display(Name = "Age")]
+        public int Age { get; set; }
+
+        [Required]
+        public string Gender { get; set; }
+
+        [Display(Name = "AvatarUrl")]
+        public string Avatar { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
