@@ -17,7 +17,8 @@ namespace BookClub.Controllers
         // GET: Index
         public ActionResult Index()
         {
-            return View();
+            List<Book> PopularFive = db.Books.OrderByDescending(book => book.AverageRating).Take(5).ToList();
+            return View(PopularFive);
         }
 
         // GET: Books
