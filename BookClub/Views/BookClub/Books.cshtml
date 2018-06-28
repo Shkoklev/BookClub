@@ -4,12 +4,23 @@
     ViewBag.Title = "Books";
 }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if (User.IsInRole("Administrator"))
+{
+    <br />
+    <p>
+      @Html.ActionLink("Create New", "Create")
+    </p>
+}
+else
+{
+    <br />
+}
 <table class="table" id="myTable">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayName("Image")
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Title)
             </th>
@@ -20,13 +31,10 @@
                 @Html.DisplayNameFor(model => model.Genre)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Year)
+                @Html.DisplayName("Year released")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Synopsis)
-            </th>
-            <th>
-                @Html.DisplayName("Image")
+                @Html.DisplayName("Rating")
             </th>
             <th></th>
         </tr>
@@ -34,31 +42,42 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+        <tr>
+            <td>
+                <img src="@item.ImageUrl" style="max-height: 300px; max-width: 250px" />
+            </td>
+            <td>
+                @Html.ActionLink(item.Title, "Details", new { id = item.Id })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Year)
+            </td>
+            <td>
+                <div class="row">
+                    <i class="glyphicon glyphicon-star"></i>
+                    @Html.DisplayFor(modelItem => item.AverageRating)
+                    @Html.DisplayName(" / 5")
+                </div>
+                <div class="row">
+                    @Html.DisplayFor(modelItem => item.Votes)
+                    @Html.DisplayName("votes")
+                </div>
+            </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Author)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Genre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Year)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Synopsis)
-                </td>
-                <td>
-                    <img src="@item.ImageUrl" style="max-height: 250px; max-width: 250px" />
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) 
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) 
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                        <br />
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    }
 
-                    @if (User.IsInRole("User"))
+                    @if(User.IsInRole("User"))
                     {
                         <div class="row">
                             <div class="col-sm-12">
@@ -67,17 +86,12 @@
                         </div>
                     }
 
-                    <div class="row">
-                        <i class="glyphicon glyphicon-star"></i>
-                        @Html.DisplayFor(modelItem => item.AverageRating)
-                        @Html.DisplayName(" / 5")
-                    </div>
-                    <div class="row">
-                        @Html.DisplayFor(modelItem => item.Votes)
-                        @Html.DisplayName("votes")
-                    </div>
+                    @if (!User.IsInRole("Administrator") && !User.IsInRole("User"))
+                    {
+                        <a class="btn btn-success" href="/Account/Login">Vote</a>
+                    }
                 </td>
-            </tr>
+        </tr>
         }
     </tbody>
 </table>

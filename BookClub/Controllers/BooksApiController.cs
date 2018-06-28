@@ -33,7 +33,7 @@ namespace BookClub.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "User")]
         public IHttpActionResult RateBook(int id, int value)
         {
             var user = UserManager.FindById(User.Identity.GetUserId());

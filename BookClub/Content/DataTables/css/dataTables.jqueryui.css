@@ -41,7 +41,7 @@ table.dataTable tbody td {
   padding: 8px 10px;
 }
 table.dataTable.row-border tbody th, table.dataTable.row-border tbody td, table.dataTable.display tbody th, table.dataTable.display tbody td {
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #0c0c0c;
 }
 table.dataTable.row-border tbody tr:first-child th,
 table.dataTable.row-border tbody tr:first-child td, table.dataTable.display tbody tr:first-child th,
@@ -49,7 +49,7 @@ table.dataTable.display tbody tr:first-child td {
   border-top: none;
 }
 table.dataTable.cell-border tbody th, table.dataTable.cell-border tbody td {
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #0c0c0c;
   border-right: 1px solid #ddd;
 }
 table.dataTable.cell-border tbody tr th:first-child,

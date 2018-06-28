@@ -23,6 +23,7 @@ namespace BookClub.Controllers
         {
         }
 
+        [Authorize(Roles = "Administrator")]
         public ActionResult AddUserToRole()
         {
             AddToRoleModel model = new AddToRoleModel();
@@ -31,6 +32,7 @@ namespace BookClub.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public ActionResult AddUserToRole(AddToRoleModel model)
         {
             var email = model.Email;
@@ -99,7 +101,7 @@ namespace BookClub.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Books", "BookClub");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:

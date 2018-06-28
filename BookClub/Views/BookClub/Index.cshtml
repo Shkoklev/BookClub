@@ -1,9 +1,9 @@
 ﻿@model List<BookClub.Models.Book>
 @{
     ViewBag.Title = "Index";
-}
+} 
 <div class="container">
-    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: 600px;">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: 700px;">
         <!-- Indicators -->
         <ol class="carousel-indicators">
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -15,21 +15,37 @@
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner" style="width: 100%">
-            <div class="active item">
-                <img src="@Model.ElementAt(0).ImageUrl" class="img-responsive" style="margin: auto" />
-            </div>
-            <div class="item">
-                <img src="@Model.ElementAt(1).ImageUrl" class="img-responsive" style="margin: auto" />
-            </div>
-            <div class="item">
-                <img src="@Model.ElementAt(2).ImageUrl" class="img-responsive" style="margin: auto"/>
-            </div>
-            <div class="item">
-                <img src="@Model.ElementAt(3).ImageUrl" class="img-responsive" style="margin: auto" />
-            </div>
-            <div class="item">
-                <img src="@Model.ElementAt(4).ImageUrl" class="img-responsive" style="margin: auto"/>
-            </div>
+            @for (int i = 0; i < 5; i++)
+            {
+                if (i == 0)
+                {
+                   <div class="active item">
+                     <h2 class="text-center">
+                         @Html.ActionLink(Model.ElementAt(i).Title, "Details", new { id = Model.ElementAt(i).Id })
+                     </h2>
+                     <img src="@Model.ElementAt(i).ImageUrl" class="img-responsive" style="margin: auto" />
+                     <div class="row text-center" style="font-size: 30px; padding-top: 20px">
+                            <i class="glyphicon glyphicon-star"></i>
+                            @Html.DisplayFor(modelItem => @Model.ElementAt(i).AverageRating)
+                            @Html.DisplayName(" / 5")
+                     </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="item">
+                        <h2 class="text-center">
+                            @Html.ActionLink(Model.ElementAt(i).Title,"Details", new { id = Model.ElementAt(i).Id })
+                        </h2>
+                        <img src="@Model.ElementAt(i).ImageUrl" class="img-responsive" style="margin: auto" />
+                        <div class="row text-center" style="font-size: 30px; padding-top: 20px">
+                            <i class="glyphicon glyphicon-star"></i>
+                            @Html.DisplayFor(modelItem => @Model.ElementAt(i).AverageRating)
+                            @Html.DisplayName(" / 5")
+                        </div>
+                    </div>
+                }
+            }
         </div>
 
         <!-- Left and right controls -->
