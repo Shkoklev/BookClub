@@ -5,10 +5,11 @@
 }
 
 <div class="container">
-    <h2>Delete</h2>
-
-    <h3>Are you sure you want to delete this?</h3>
-    <h4>Book</h4>
+    <div style="padding-left: 175px">
+        <h2>Delete</h2>
+        <h3>Are you sure you want to delete this?</h3>
+        <h4>Book</h4>
+    </div>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -68,7 +69,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ImageUrl)
+            @Html.DisplayName("Image")
         </dt>
 
         <dd>
@@ -81,7 +82,7 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
+        <div class="form-actions no-color" style="padding-left: 175px" >
             <input type="submit" value="Delete" class="btn btn-default" /> |
             @Html.ActionLink("Back to List", "Books")
         </div>

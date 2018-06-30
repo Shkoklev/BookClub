@@ -4,78 +4,104 @@
     ViewBag.Title = "Details";
 }
 
-<div class="container">
-    <h2>Details</h2>
-    <h4>Book</h4>
+<div class="container" style="font-size: 17px">
+    <div class="row text-center">
+        <h2>@Model.Title</h2>
+    </div>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+        <div class="row">
+            <div class="col-md-4">
+                <dd>
+                    <img src="@Model.ImageUrl" , style="max-width: 250px; max-height: 400px" />
+                    <div class="text-center" style="font-size: 20px; padding: 10px 0px 0px 75px">
+                        @if (Model.Rating == 0)
+                        {
+                            <i class="glyphicon glyphicon-star-empty" style="font-size: 25px; margin-bottom: 10px"></i>
+                        }
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+                        @if (Model.Rating != 0)
+                        {
+                            <i class="glyphicon glyphicon-star" style="font-size: 25px; margin-bottom: 10px"></i>
+                        }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Author)
-        </dt>
+                        @Html.DisplayFor(model => model.AverageRating)
+                        @Html.DisplayName(" / 5")
 
-        <dd>
-            @Html.DisplayFor(model => model.Author)
-        </dd>
+                        @if((User.IsInRole("User") || User.IsInRole("Administrator"))  && Model.Rating != 0)
+                        {
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#votes-list">Voted by</button>
+                        }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Genre)
-        </dt>
+                        <div id="votes-list" class="modal fade">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h3>@Model.Title is voted by:</h3>
+                                    </div>
+                                    <div class="modal-body">
+                                        @foreach (var user in Model.Users)
+                                        {
+                                            <div class="row">
+                                                <img src="@user.Avatar" style="max-height: 30px; max-width: 20px" />
+                                                <a href="/Account/UserProfile/@user.Id">@user.UserName</a>
+                                            </div>
+                                        }
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal" #closeDialog>Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </dd>
+            </div>
+            <div class="col-md-8">
 
-        <dd>
-            @Html.DisplayFor(model => model.Genre)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Author)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Year)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Author)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Year)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Genre)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Synopsis)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Genre)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Synopsis)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Year)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Votes)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Year)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Votes)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Votes)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Rating)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Votes)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Rating)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Synopsis)
+                </dt>
 
-        <dt>
-            @Html.DisplayName("Image")
-        </dt>
-
-        <dd>
-            <img src="@Model.ImageUrl" , style="max-width: 300px; max-height: 400px" />
-        </dd>
-
+                <dd>
+                    @Html.DisplayFor(model => model.Synopsis)
+                </dd>
+            </div>
+        </div>
     </dl>
+    <p class="text-center">
+        @Html.ActionLink("Back to List", "Books")
+    </p>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Books")
-</p>

@@ -15,7 +15,7 @@ else
 {
     <br />
 }
-<table class="table" id="myTable">
+<table class="table" id="myTable" style="font-size: 17px">
     <thead>
         <tr>
             <th>
@@ -43,24 +43,32 @@ else
         @foreach (var item in Model)
         {
         <tr>
-            <td>
+            <td style="border-top: 1px solid #000000">
                 <img src="@item.ImageUrl" style="max-height: 300px; max-width: 250px" />
             </td>
-            <td>
+            <td style="border-top: 1px solid #000000; font-size: 22px">
                 @Html.ActionLink(item.Title, "Details", new { id = item.Id })
             </td>
-            <td>
+            <td style="border-top: 1px solid #000000">
                 @Html.DisplayFor(modelItem => item.Author)
             </td>
-            <td>
+            <td style="border-top: 1px solid #000000">
                 @Html.DisplayFor(modelItem => item.Genre)
             </td>
-            <td>
+            <td style="border-top: 1px solid #000000">
                 @Html.DisplayFor(modelItem => item.Year)
             </td>
-            <td>
+            <td style="border-top: 1px solid #000000; font-size: 20px">
                 <div class="row">
-                    <i class="glyphicon glyphicon-star"></i>
+                    @if (item.Rating == 0)
+                    {
+                        <i class="glyphicon glyphicon-star-empty" style="font-size: 25px"></i>
+                    }
+                    @if (item.Rating != 0)
+                    {
+                        <i class="glyphicon glyphicon-star" style="font-size: 25px"></i>
+                    }
+
                     @Html.DisplayFor(modelItem => item.AverageRating)
                     @Html.DisplayName(" / 5")
                 </div>
@@ -69,7 +77,7 @@ else
                     @Html.DisplayName("votes")
                 </div>
             </td>
-                <td>
+                <td style="border-top: 1px solid #000000">
                     @if (User.IsInRole("Administrator"))
                     {
                         @Html.ActionLink("Edit", "Edit", new { id = item.Id })

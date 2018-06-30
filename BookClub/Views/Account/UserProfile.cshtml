@@ -1,0 +1,33 @@
+﻿@model BookClub.Models.ApplicationUser
+@{
+    ViewBag.Title = "UserProfile";
+}
+
+<div class="row" style="margin-top: 4%">
+    <div class="card">
+        <div class="card-title text-center">
+            <img src=@Model.Avatar style="margin: 1%; max-width: 100px; max-height: 150px"/>
+            <p style="font-size: 20px">
+                @Model.UserName
+            </p>
+        </div>
+        <div class="card-body text-center" style="margin-bottom: 70px">
+             <p style="font-size: 20px"><i class="fas fa-envelope"></i> @Model.Email</p>
+             <p style="font-size: 20px">Age : @Model.Age</p>
+             <p style="font-size: 20px">Gender : @Model.Gender</p>
+         </div>
+        @if(User.IsInRole("User"))
+        { 
+        <div class="card-footer text-center">
+            <p style="font-size: 18px">
+                Voted Books :
+            </p>
+            @foreach(var Book in Model.Books)
+            {
+                <a style="font-size: 20px" href="/BookClub/Details/@Book.Id">@Book.Title</a>
+                <br />
+            }
+        </div>
+        }
+    </div>
+</div>

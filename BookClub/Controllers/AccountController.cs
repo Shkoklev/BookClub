@@ -18,9 +18,11 @@ namespace BookClub.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext ApplicationDbContext { get; set; }
 
         public AccountController()
         {
+            this.ApplicationDbContext = new ApplicationDbContext();
         }
 
         [Authorize(Roles = "Administrator")]
@@ -29,6 +31,20 @@ namespace BookClub.Controllers
             AddToRoleModel model = new AddToRoleModel();
             model.roles = new List<string>() { "User", "Editor", "Administrator"};
             return View(model);
+        }
+
+        [Authorize]
+        public ActionResult UserProfile(string id)
+        {
+            ApplicationUser user = ApplicationDbContext.Users.FirstOrDefault(x => x.Id == id);
+            return View(user);
+        }
+
+        [Authorize]
+        public ActionResult Users()
+        {
+            List<ApplicationUser> Users = ApplicationDbContext.Users.ToList();
+            return View(Users);
         }
 
         [HttpPost]

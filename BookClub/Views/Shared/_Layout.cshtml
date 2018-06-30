@@ -6,7 +6,7 @@
     <title>Book Club</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 </head>
 <body style="background-color: #e2dcc5">
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -22,8 +22,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Books", "Books", "BookClub")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Users", "Users", "Account")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
