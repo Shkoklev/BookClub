@@ -33,10 +33,11 @@ namespace BookClub
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/Site.css",
                       "~/Content/DataTables/css/dataTables.bootstrap.css",
                       "~/Content/star-rating.css",
-                      "~/Content/star-rating.min.css", 
-                      "~/Content/site.css"));
+                      "~/Content/star-rating.min.css"
+                      ));
         }
     }
 }
